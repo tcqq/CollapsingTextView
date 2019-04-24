@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CollapsingTextView">
+        <attr name="collapsing_more_text" format="string" />
+        <attr name="collapsing_less_text" format="string" />
+        <attr name="collapsing_text_color" format="color" />
+        <attr name="collapsing_showing_line" format="integer" />
+    </declare-styleable>
+</resources>

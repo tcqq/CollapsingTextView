@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">CollapsingTextView</string>
+    <string name="see_more">See more</string>
+    <string name="see_less">See less</string>
+</resources>
