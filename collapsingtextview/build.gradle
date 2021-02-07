@@ -1,7 +1,10 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-android'
-apply plugin: 'com.novoda.bintray-release'
+plugins {
+    id 'com.android.library'
+    id 'kotlin-android'
+    id 'kotlin-android-extensions'
+}
+
+group='com.github.tcqq'
 
 android {
     compileSdkVersion 29
@@ -41,14 +44,3 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
 }
-
-publish {
-    userOrg = 'tcqq'
-    groupId = 'com.tcqq.android'
-    artifactId = 'collapsingtextview'
-    repoName = 'android'
-    publishVersion = '1.0.0'
-    desc = 'CollapsingTextView enables TextView to support displaying more or less text.'
-    website = 'https://github.com/tcqq/collapsingtextview'
-}
-
