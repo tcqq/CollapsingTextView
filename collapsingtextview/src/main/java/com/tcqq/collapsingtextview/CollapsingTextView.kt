@@ -79,23 +79,6 @@ class CollapsingTextView
         mainText = text.toString()
     }
 
-    override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(text, type)
-        handleText()
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        handleText()
-    }
-
-    private fun handleText() {
-        if (!isAlreadySet) {
-            mainText = text.toString()
-            addShowMore()
-        }
-    }
-
     private fun setShowMoreColoringAndClickable() {
         val spannableString = SpannableString(text)
 
@@ -137,47 +120,47 @@ class CollapsingTextView
                     isAlreadySet = true
                 }
                 val showingText = StringBuilder()
-
                 if (isCharEnable) {
                     if (showingChar >= text.length) {
                         try {
-                            throw Exception("Character count cannot exceed total line count")
+                            throw Exception("Character count cannot be exceed total line count")
                         } catch (e: Exception) {
                             e.printStackTrace()
                         }
-                    } else {
-                        var newText = text.substring(0, showingChar)
-                        newText += ellipsis + moreText
-                        setText(newText)
-                        Log.d(TAG, "Text: $newText")
                     }
+                    var newText = text.substring(0, showingChar)
+                    newText += ellipsis + moreText
+                    setText(newText)
+                    Log.d(TAG, "Text: $newText")
                 } else {
-                    if (showingLine < lineCount) {
-                        var start = 0
-                        var end: Int
-                        for (i in 0 until showingLine) {
-                            end = layout.getLineEnd(i)
-                            showingText.append(text.substring(start, end))
-                            start = end
-                        }
-
-                        var newText = showingText.substring(
-                            0,
-                            showingText.length - (ellipsis.length + moreText.length + MAGIC_NUMBER)
-                        )
-                        Log.d(TAG, "Text: $newText")
-                        Log.d(TAG, "Text: $showingText")
-                        newText += ellipsis + moreText
-
-                        setText(newText)
-                    } else {
+                    if (showingLine >= lineCount) {
                         try {
-                            throw Exception("Line Number cannot exceed total line count")
+                            throw Exception("Line Number cannot be exceed total line count")
                         } catch (e: Exception) {
                             e.printStackTrace()
                             Log.e(TAG, "Error: " + e.message)
                         }
+
+                        viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        return
                     }
+                    var start = 0
+                    var end: Int
+                    for (i in 0 until showingLine) {
+                        end = layout.getLineEnd(i)
+                        showingText.append(text.substring(start, end))
+                        start = end
+                    }
+
+                    var newText = showingText.substring(
+                        0,
+                        showingText.length - (ellipsis.length + moreText.length + MAGIC_NUMBER)
+                    )
+                    Log.d(TAG, "Text: $newText")
+                    Log.d(TAG, "Text: $showingText")
+                    newText += ellipsis + moreText
+
+                    setText(newText)
                 }
 
                 setShowMoreColoringAndClickable()
@@ -185,7 +168,6 @@ class CollapsingTextView
             }
         })
     }
-
 
     private fun showLess() {
         val text = text.toString() + lessText
