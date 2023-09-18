@@ -1,3 +1,10 @@
-<resources>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
     <string name="app_name">CollapsingTextView</string>
+
+    <string name="test_job_description" translatable="false">An experienced Android developer to work on rounx App. We need someone to work on building the front-end services. This project requires experience with:
+        \n1. Experience building Android applications in Java (or Kotlin) using the Android SDK
+        \n2. Experience in understanding large and complex code bases
+        \n\nIn your proposal, please share a brief summary of your experience and tell us about a recent Android project, ideally one currently available on Google Play.</string>
+
 </resources>

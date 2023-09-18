@@ -70,13 +70,30 @@ class CollapsingTextView
     @ColorInt
     private fun primaryColor(context: Context): Int {
         val value = TypedValue()
-        context.theme.resolveAttribute(R.attr.colorPrimary, value, true)
+        context.theme.resolveAttribute(android.R.attr.colorPrimary, value, true)
         return value.data
     }
 
     override fun onFinishInflate() {
         super.onFinishInflate()
         mainText = text.toString()
+    }
+
+    override fun setText(text: CharSequence?, type: BufferType?) {
+        super.setText(text, type)
+        handleText()
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        handleText()
+    }
+
+    private fun handleText() {
+        if (!isAlreadySet) {
+            mainText = text.toString()
+            addShowMore()
+        }
     }
 
     private fun setShowMoreColoringAndClickable() {

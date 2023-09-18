@@ -5,11 +5,12 @@ plugins {
 }
 
 android {
-    compileSdkVersion 29
+    namespace 'com.example.collapsingtextview'
+    compileSdk 34
     defaultConfig {
         applicationId "com.example.collapsingtextview"
-        minSdkVersion 17
-        targetSdkVersion 29
+        minSdkVersion 21
+        targetSdkVersion 34
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -25,11 +26,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    //Test
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
     //Kotlin
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
@@ -43,5 +39,4 @@ dependencies {
 
     //CollapsingTextView
     implementation project(':collapsingtextview')
-
 }
